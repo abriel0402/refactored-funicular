@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,19 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <nav>
-        <button>
-            <a href="{% url "index" %}">Home</a>
-        </button>
+    <link rel="stylesheet" type="text/css" href="{% static 'venueapp/css/bootstrap.css' %}">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark row"> 
+        <a class="navbar-brand text-light col-sm text-center" href="{% url "index" %}">Home</a>  
+        <a class="navbar-brand text-light col-sm text-center"  href="{% url "addEvent" %}">Add New Event</a>
+        <a class="navbar-brand text-light col-sm text-center"  href="{% url "removeEvent" %}">Remove Event</a>
     </nav>
 </head>
-<body>
-    <h2>Remove an Event</h2>
+<body class="bg-light">
+    <h1 class="text-center p-3">Remove an Event</h2>
+    <ul class="list-group p-3">
     {% for event in events %}
-        <li>
+        <li class="list-group-item mx-auto">
             <a href={% url "delete" event.id %}>{{ event.name }}</a>
            
         </li>
     {% endfor %}
+    </ul>
 </body>
 </html>

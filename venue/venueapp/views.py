@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Event, Seat
 from .forms import AddEventForm
@@ -7,6 +7,7 @@ from .forms import AddEventForm
 events = Event.objects.all()
 
 
+    
             
 
 
@@ -31,3 +32,14 @@ def addEvent(request):
     return render(request, 'venueapp/addEvent.html', {
         "form": form,
     })
+
+def delete(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    event.delete()
+    return redirect("index")
+
+def removeEvent(request):
+    return render(request, "venueapp/removeEvent.html", {
+        "events": Event.objects.all(),
+    })
+
