@@ -17,15 +17,28 @@
 </head>
 
 <body class="bg-light">
+    <h1 class="text-center px-3 pt-3 pb-2">Add New Event</h1>
     <div>
     <form action="" method="post">
         <div class="p-3 text-center">
         {% csrf_token %}
-        {{form}}
+        <div class="row col justify-content-center p-1">
+            Name:&nbsp;&nbsp;{{form.name}}
+            </div>
+        <div class="row col justify-content-center p-1">
+            Host:&nbsp;&nbsp;&nbsp;{{form.host}}
+            </div>
+            <div class="row col justify-content-center p-1">
+                Date:&nbsp;&nbsp;&nbsp;{{form.date}}
+                </div>
+                    
+        
         </div>
         <div class="row p-1">
             <div class="col text-center">
-        <button class="btn btn-primary" href="{% url "index" %}"type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">
+            Submit
+        </button>
         </div>
     </div>
     </form>

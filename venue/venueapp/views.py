@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Event, Seat
 from .forms import AddEventForm
+import math
 
 
 events = Event.objects.all()
 
 
-    
-            
+
+
+
 
 
 # Create your views here.
@@ -19,8 +21,20 @@ def index(request):
 
 def eventPage(request, event_id):
     event = Event.objects.get(pk=event_id)
+    eventSeats = []
+    for seat in Seat.objects.all():
+        if seat.event.id == event_id:
+            eventSeats.append(seat)
+    soldOutCheck = True
+    for seat in eventSeats:
+        if seat.booked == False:
+            soldOutCheck = False
+    if soldOutCheck == True:
+        event.soldOut = True
     return render(request, "venueapp/event.html", {
         "event": event,
+        "eventSeats": eventSeats,
+
     })
 
 def addEvent(request):
@@ -29,6 +43,12 @@ def addEvent(request):
         form = AddEventForm(request.POST)
         if form.is_valid():
             form.save()
+            eventsLen = events.count()
+            newEvent = events[eventsLen-1]
+            for i in range(5):
+                for j in range(5):
+                    Seat.objects.create(row=i+1, col=j+1, booked=False, event=newEvent)
+
     return render(request, 'venueapp/addEvent.html', {
         "form": form,
     })
@@ -43,3 +63,15 @@ def removeEvent(request):
         "events": Event.objects.all(),
     })
 
+def seatPage(request, seat_id):
+    seat = Seat.objects.get(pk=seat_id)
+    return render(request, "venueapp/seat.html", {
+        "seat": seat,
+        "seat_id": seat.id,
+    })
+
+def seatPurchased(request, seat_id, event_id):
+    seat = Seat.objects.get(pk=seat_id)
+    seat.booked = True
+    seat.save()
+    return redirect("event", event_id=event_id)

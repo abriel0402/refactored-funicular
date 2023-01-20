@@ -35,6 +35,8 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+
+
 *,
 *::before,
 *::after {
@@ -168,8 +170,8 @@ a {
 }
 
 a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  color: black;
+  text-decoration: none;
 }
 
 a:not([href]):not([tabindex]) {

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'venueapp/css/bootstrap.css' %}">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark row">
+        <a class="navbar-brand text-light col-sm text-center" href="{% url "index" %}">Home</a>  
+        <a class="navbar-brand text-light col-sm text-center"  href="{% url "addEvent" %}">Add New Event</a>
+        <a class="navbar-brand text-light col-sm text-center"  href="{% url "removeEvent" %}">Remove Event</a>
+</nav>
+</head>
+<body>
+    <h1 class="text-center p-1">{{ seat.event.name }}</h1>
+    <h3 class="text-center p-1">Hosted by: {{seat.event.host}}</h3>
+    <h3 class="text-center p-1">Date: {{seat.event.date}}</h3>
+    <h2 class="text-center p-1 pt-5"> Seat row {{ seat.row }} column {{ seat.col }}</h3>
+
+    <div class="row pt-2 justify-content-center">
+        <a href="{% url "seatPurchased" seat.event.id seat.id %}" type="button" class="btn btn-success col-2 mr-3">Purchase</a>
+        <a href="{% url "event" seat.event.id %}" type="button" class="btn btn-danger col-2 ml-3">Back</a>
+        </div>
+
+
+</body>
+</html>

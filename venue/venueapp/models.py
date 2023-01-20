@@ -9,8 +9,8 @@ class Event(models.Model):
     name = models.CharField(max_length=64)
     host = models.CharField(max_length=64)
     date = models.CharField(max_length=64)
-    type = models.CharField(max_length=64)
     soldOut = models.BooleanField()
+
 
     def __str__(self):
         return self.name
