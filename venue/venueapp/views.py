@@ -20,6 +20,15 @@ def index(request):
     })
 
 def eventPage(request, event_id):
+
+    seatsRow1 = []
+    seatsRow2 = []
+    seatsRow3 = []
+    seatsRow4 = []
+    seatsRow5 = []
+
+    rowedSeats = [seatsRow1, seatsRow2, seatsRow3, seatsRow4, seatsRow5]
+
     event = Event.objects.get(pk=event_id)
     eventSeats = []
     for seat in Seat.objects.all():
@@ -31,9 +40,23 @@ def eventPage(request, event_id):
             soldOutCheck = False
     if soldOutCheck == True:
         event.soldOut = True
+
+    for seat in eventSeats:
+        if seat.row == 1:
+            seatsRow1.append(seat)
+        elif seat.row == 2:
+            seatsRow2.append(seat)
+        elif seat.row == 3:
+            seatsRow3.append(seat)
+        elif seat.row == 4:
+            seatsRow4.append(seat)
+        elif seat.row == 5:
+            seatsRow5.append(seat)
+    
     return render(request, "venueapp/event.html", {
         "event": event,
         "eventSeats": eventSeats,
+        "rowedSeats": rowedSeats,
 
     })
 
