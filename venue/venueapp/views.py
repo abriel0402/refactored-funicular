@@ -9,7 +9,10 @@ events = Event.objects.all()
 
 
 
-
+# Where I left off:
+# Seats addedto models, need to make seating
+# chart dynamic to the num of seats chosen instead
+# of just 5 rows of 5 seats
 
 
 

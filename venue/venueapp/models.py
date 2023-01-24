@@ -3,6 +3,11 @@ from django.db import models
 
 
 
+OPTIONS = {
+    (25, '25'),
+    (60, '60'),
+    (100, '100'),
+}
 
 # Create your models here.
 class Event(models.Model):
@@ -10,6 +15,7 @@ class Event(models.Model):
     host = models.CharField(max_length=64)
     date = models.CharField(max_length=64)
     soldOut = models.BooleanField()
+    seats = models.CharField(choices=OPTIONS, default=25, max_length=3)
 
 
     def __str__(self):
