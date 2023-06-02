@@ -15,7 +15,7 @@ class Event(models.Model):
     host = models.CharField(max_length=64)
     date = models.CharField(max_length=64)
     soldOut = models.BooleanField()
-    seats = models.CharField(choices=OPTIONS, default=25, max_length=3)
+    seats = 100
 
 
     def __str__(self):

@@ -71,8 +71,8 @@ def addEvent(request):
             form.save()
             eventsLen = events.count()
             newEvent = events[eventsLen-1]
-            for i in range(5):
-                for j in range(5):
+            for i in range(20):
+                for j in range(15):
                     Seat.objects.create(row=i+1, col=j+1, booked=False, event=newEvent)
 
     return render(request, 'venueapp/addEvent.html', {
